@@ -10,6 +10,10 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 class LyricsRequest(BaseModel):
     lyrics: str
 
+@app.get("/")
+async def root():
+    return {"message": "FastAPI app is running!"}
+
 @app.post("/transliterate")
 async def transliterate_lyrics(req: LyricsRequest):
     prompt = (
