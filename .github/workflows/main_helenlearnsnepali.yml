@@ -36,17 +36,16 @@ jobs:
 
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+        - name: Zip artifact for deployment
+        run: |
+        cd purplelyrics
+        zip -r ../release.zip .
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment jobs
+        - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
-          name: python-app
-          path: |
-            release.zip
-            !venv/
+        name: python-app
+        path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
