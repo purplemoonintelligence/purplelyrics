@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         working-directory: ./purplelyrics
         run: |
-        pip install -r requirements.txt
+        pip install -r requirement.txt
 
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
