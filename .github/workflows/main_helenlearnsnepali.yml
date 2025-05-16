@@ -25,15 +25,9 @@ jobs:
         run: |
           pip install -r purplelyrics/requirements.txt
 
-      - name: Copy startup.sh to workspace root
+      - name: Zip app contents and startup.sh
         run: |
-          cp purplelyrics/startup.sh .
-
-      - name: Zip only contents (flatten structure)
-        run: |
-          cd purplelyrics
-          zip -r ../release.zip .
-          cd ..
+          zip -r release.zip purplelyrics
           zip -g release.zip startup.sh
 
       - name: Upload artifact for deployment
@@ -57,7 +51,7 @@ jobs:
         with:
           name: python-app
 
-      - name: Unzip release.zip
+      - name: Unzip artifact
         run: unzip release.zip
 
       - name: Azure Login
