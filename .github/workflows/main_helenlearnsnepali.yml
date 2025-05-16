@@ -21,11 +21,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        working-directory: ./purplelyrics
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+- name: Install dependencies
+  working-directory: ./purplelyrics/purplelyrics
+  run: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
 
       - name: Zip artifact for deployment
         run: zip -r release.zip purplelyrics
