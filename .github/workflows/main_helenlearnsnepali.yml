@@ -25,7 +25,15 @@ jobs:
         run: |
           pip install -r purplelyrics/requirements.txt
 
-      - name: Upload artifact for deployment jobs
+      - name: Prepare deployment package
+        run: |
+          mkdir deploy
+          cp purplelyrics/main.py deploy/
+          cp purplelyrics/requirements.txt deploy/
+          cd deploy
+          zip -r ../release.zip .
+
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: python-app
