@@ -25,15 +25,20 @@ jobs:
         run: |
           pip install -r purplelyrics/requirements.txt
 
-      - name: Prepare artifact with app code + startup.sh
+      - name: Prepare deploy folder
         run: |
           mkdir deploy
-          cp purplelyrics/* deploy/
-          cp purplelyrics/startup.sh deploy/startup.sh
+          cp purplelyrics/main.py deploy/
+          cp purplelyrics/requirements.txt deploy/
+          cp purplelyrics/startup.sh deploy/
+          chmod +x deploy/startup.sh
+
+      - name: Zip deployment package
+        run: |
           cd deploy
           zip -r ../release.zip .
 
-      - name: Upload artifact for deployment jobs
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: python-app
@@ -54,7 +59,7 @@ jobs:
         with:
           name: python-app
 
-      - name: Unzip artifact
+      - name: Unzip package
         run: unzip release.zip
 
       - name: Azure Login
@@ -68,4 +73,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'helenlearnsnepali'
-          slot-name: 'Production'
+          package: release.zip
