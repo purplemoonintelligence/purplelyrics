@@ -25,9 +25,12 @@ jobs:
         run: |
           pip install -r purplelyrics/requirements.txt
 
-      - name: Zip purplelyrics folder (all app files + startup.sh)
+      - name: Prepare artifact with app code + startup.sh
         run: |
-          cd purplelyrics
+          mkdir deploy
+          cp purplelyrics/* deploy/
+          cp purplelyrics/startup.sh deploy/startup.sh
+          cd deploy
           zip -r ../release.zip .
 
       - name: Upload artifact for deployment jobs
