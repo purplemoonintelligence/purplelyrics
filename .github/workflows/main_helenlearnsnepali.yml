@@ -31,6 +31,7 @@ jobs:
           zip -r ../release.zip .
           cd ..
           zip -g release.zip startup.sh
+          unzip -l release.zip
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
