@@ -25,19 +25,16 @@ jobs:
         run: |
           pip install -r purplelyrics/requirements.txt
 
-      - name: Move startup.sh to root of zip content
+      - name: Prepare deployment package
         run: |
           mkdir deploy
           cp purplelyrics/main.py deploy/
           cp purplelyrics/requirements.txt deploy/
           cp startup.sh deploy/
-
-      - name: Zip deployment folder
-        run: |
           cd deploy
           zip -r ../release.zip .
 
-      - name: Upload artifact for deployment
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: python-app
